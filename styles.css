@@ -12,7 +12,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  color: #333;
+  color: #333; /* Primary text color */
 }
 
 /* Container Styles */
@@ -30,7 +30,7 @@ body {
 /* Heading Style */
 h1 {
   font-size: 1.8rem;
-  color: #000000;
+  color: #000; /* Dark black heading */
   margin-bottom: 30px;
   font-weight: 600;
   text-transform: uppercase;
@@ -67,46 +67,11 @@ h1 {
   display: block;
   font-size: 2.5rem;
   font-weight: bold;
-  color: #000000;
+  color: #333; /* Primary text color */
   letter-spacing: 2px;
 }
 
 .timer div small {
   display: block;
   font-size: 1rem;
-  color: #888;
-  margin-top: 5px;
-  text-transform: uppercase;
-}
-
-/* "Created by Tom" at the bottom */
-footer {
-  font-size: 0.9rem;
-  color: #aaa;
-  margin-top: 20px;
-}
-
-/* Responsive Design */
-@media (max-width: 480px) {
-  .container {
-    padding: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  }
-
-  h1 {
-    font-size: 1.4rem;
-    margin-bottom: 20px;
-  }
-
-  .timer div {
-    min-width: 60px;
-  }
-
-  .timer div span {
-    font-size: 2rem;
-  }
-
-  .timer div small {
-    font-size: 0.9rem;
-  }
-}
+  color: #000; /*
