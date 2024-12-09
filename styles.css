@@ -9,8 +9,9 @@ body {
   font-family: 'Arial', sans-serif;
   background-color: #ffffff; /* White background */
   display: flex;
+  flex-direction: column; /* Align elements vertically */
   justify-content: center;
-  align-items: center;
+  align-items: center; /* Center-align content horizontally */
   height: 100vh;
   color: #333; /* Primary text color */
 }
@@ -24,7 +25,6 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   max-width: 450px;
   width: 100%;
-  transition: transform 0.3s ease-in-out;
 }
 
 /* Heading Style */
@@ -58,7 +58,7 @@ h1 {
   flex-grow: 1;
 }
 
-.timer div: hover {
+.timer div:hover {
   transform: scale(1.05);
   background-color: #f1f1f1;
 }
@@ -74,7 +74,10 @@ h1 {
 .timer div small {
   display: block;
   font-size: 1rem;
-  color: #000; }
+  color: #000; /* Secondary dark text */
+  margin-top: 5px;
+  text-transform: uppercase;
+}
 
 /* Small text below the timer and outside the timer box */
 .below-timer-text {
@@ -83,4 +86,43 @@ h1 {
   margin-top: 20px; /* Gap above the text */
   text-align: center; /* Center align the text */
   font-style: italic; /* Optional: Italic for emphasis */
+  max-width: 400px; /* Limit width for readability */
+}
+
+/* Footer */
+footer {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+
+  .timer div {
+    min-width: 60px;
+  }
+
+  .timer div span {
+    font-size: 2rem;
+  }
+
+  .timer div small {
+    font-size: 0.9rem;
+  }
+
+  .below-timer-text {
+    font-size: 0.8rem;
+    margin-top: 15px;
+  }
 }
