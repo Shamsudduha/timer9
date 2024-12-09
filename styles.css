@@ -50,6 +50,7 @@ h1 {
 .timer div {
   background: #fff;
   padding: 25px;
+  margin-bottom: 40px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   text-align: center;
@@ -58,7 +59,7 @@ h1 {
   flex-grow: 1;
 }
 
-.timer div:hover {
+.timer div: hover {
   transform: scale(1.05);
   background-color: #f1f1f1;
 }
