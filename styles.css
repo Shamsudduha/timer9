@@ -77,9 +77,10 @@ h1 {
   color: #000; /*
 /* Small text below the timer */
 .below-timer-text {
-  font-size: 0.9rem; /* Small font size */
+  font-size: 0.9rem; /* Small font size */  
+  padding: 25px;
   color: #333; /* Subtle dark gray text */
-  margin-top: 20px; /* Gap above the text */
+  margin-top: 40px; /* Gap above the text */
   margin-bottom: 20px; /* Optional gap below if needed */
   text-align: center; /* Center align the text */
   font-style: italic; /* Optional: Italic for emphasis */
