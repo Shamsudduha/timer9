@@ -41,7 +41,7 @@ let targetDate = currentExam.date;
 let nextExam = currentExam.next;
 
 // Update the "next exam" text
-document.getElementById("next-exam").textContent = `Next Exam: ${currentExam.name} on ${targetDate.toLocaleDateString()}`;
+document.getElementById("next-exam").textContent = `Next Exam: ${currentExam.name} on ${currentExam.date.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })}`;
 
 // Function to update the countdown timer
 function updateTimer() {
@@ -69,7 +69,7 @@ function updateTimer() {
       nextExam = currentExam.next;
 
       // Update the "next exam" text
-      document.getElementById("next-exam").textContent = `Next Exam: ${currentExam.name} on ${targetDate.toLocaleDateString()}`;
+      document.getElementById("next-exam").textContent = `Next Exam: ${currentExam.name} on ${currentExam.date.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })}`;
     }
   }
 }
