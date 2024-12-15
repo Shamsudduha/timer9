@@ -22,17 +22,26 @@ const exams = [
   },
 ];
 
-// Get current date and find the next exam
-let currentExamIndex = exams.findIndex((exam) => exam.date > new Date());
-if (currentExamIndex === -1) {
-  currentExamIndex = exams.length - 1; // If no upcoming exam, show the last one
+// Function to get the next upcoming exam
+function getNextExam() {
+  const now = new Date();
+  // Find the first exam whose date is in the future
+  return exams.find((exam) => exam.date > now);
 }
 
-const targetDate = exams[currentExamIndex].date;
-const nextExam = exams[currentExamIndex].next;
+// Set up the countdown for the next exam
+let currentExam = getNextExam();
+if (!currentExam) {
+  // If no future exams, show the last exam
+  currentExam = exams[exams.length - 1];
+}
+
+// Set the target date for the countdown timer
+let targetDate = currentExam.date;
+let nextExam = currentExam.next;
 
 // Update the "next exam" text
-document.getElementById("next-exam").textContent = `Next Exam: ${exams[currentExamIndex].name} on ${targetDate.toLocaleDateString()}`;
+document.getElementById("next-exam").textContent = `Next Exam: ${currentExam.name} on ${targetDate.toLocaleDateString()}`;
 
 // Function to update the countdown timer
 function updateTimer() {
@@ -51,11 +60,17 @@ function updateTimer() {
   document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
   document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
 
-  // If the countdown is over, show the next exam
-  if (distance < 0 && currentExamIndex < exams.length - 1) {
-    currentExamIndex++;
-    targetDate = exams[currentExamIndex].date;
-    document.getElementById("next-exam").textContent = `Next Exam: ${exams[currentExamIndex].name} on ${targetDate.toLocaleDateString()}`;
+  // If the countdown is over, switch to the next exam
+  if (distance < 0) {
+    if (nextExam) {
+      // Move to the next exam
+      currentExam = exams.find((exam) => exam.name === nextExam);
+      targetDate = currentExam.date;
+      nextExam = currentExam.next;
+
+      // Update the "next exam" text
+      document.getElementById("next-exam").textContent = `Next Exam: ${currentExam.name} on ${targetDate.toLocaleDateString()}`;
+    }
   }
 }
 
