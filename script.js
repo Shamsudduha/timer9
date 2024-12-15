@@ -2,23 +2,23 @@
 const exams = [
   {
     date: new Date("December 18, 2024 10:00:00"),
-    name: "Anatomy with Histology",
-    next: "Physiology on 22nd Dec",
+    name: "Anatomy with Histology (Paper II)",
   },
   {
     date: new Date("December 22, 2024 10:00:00"),
-    name: "Physiology",
-    next: "Physiology on 24th Dec",
+    name: "Physiology (Paper I)",
   },
   {
     date: new Date("December 24, 2024 10:00:00"),
-    name: "Physiology",
-    next: "Biochemistry on 29th Dec",
+    name: "Physiology (Paper II)",
   },
   {
     date: new Date("December 29, 2024 10:00:00"),
-    name: "Biochemistry",
-    next: null, // No next exam after Biochemistry
+    name: "Biochemistry (Paper I)",
+  },
+  {
+    date: new Date("December 31, 2024 10:00:00"),
+    name: "Biochemistry (Paper II)",
   },
 ];
 
@@ -26,22 +26,30 @@ const exams = [
 function getNextExam() {
   const now = new Date();
   // Find the first exam whose date is in the future
-  return exams.find((exam) => exam.date > now);
+  return exams.findIndex((exam) => exam.date > now);
 }
 
-// Set up the countdown for the next exam
-let currentExam = getNextExam();
-if (!currentExam) {
-  // If no future exams, show the last exam
-  currentExam = exams[exams.length - 1];
+// Get the index of the next upcoming exam
+let currentIndex = getNextExam();
+if (currentIndex === -1) {
+  // No upcoming exams, use the last exam as a fallback
+  currentIndex = exams.length - 1;
 }
 
-// Set the target date for the countdown timer
+// Initialize target date and exam
+let currentExam = exams[currentIndex];
 let targetDate = currentExam.date;
-let nextExam = currentExam.next;
 
-// Update the "next exam" text
-document.getElementById("next-exam").textContent = `Next Exam: ${currentExam.name} on ${currentExam.date.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })}`;
+// Function to update the "next exam" text
+function updateNextExamText() {
+  const formattedDate = `${currentExam.date
+    .getDate()
+    .toString()
+    .padStart(2, "0")}.${(currentExam.date.getMonth() + 1)
+    .toString()
+    .padStart(2, "0")}.${currentExam.date.getFullYear()}`;
+  document.getElementById("next-exam").textContent = `Next Exam: ${currentExam.name} on ${formattedDate}`;
+}
 
 // Function to update the countdown timer
 function updateTimer() {
@@ -62,18 +70,27 @@ function updateTimer() {
 
   // If the countdown is over, switch to the next exam
   if (distance < 0) {
-    if (nextExam) {
+    currentIndex += 1;
+    if (currentIndex < exams.length) {
       // Move to the next exam
-      currentExam = exams.find((exam) => exam.name === nextExam);
+      currentExam = exams[currentIndex];
       targetDate = currentExam.date;
-      nextExam = currentExam.next;
-
-      // Update the "next exam" text
-      document.getElementById("next-exam").textContent = `Next Exam: ${currentExam.name} on ${currentExam.date.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })}`;
+      updateNextExamText(); // Update the "next exam" text
+    } else {
+      // No more exams, clear the timer and update text
+      clearInterval(timerInterval);
+      document.getElementById("next-exam").textContent = "All exams are over!";
+      document.getElementById("days").textContent = "00";
+      document.getElementById("hours").textContent = "00";
+      document.getElementById("minutes").textContent = "00";
+      document.getElementById("seconds").textContent = "00";
     }
   }
 }
 
+// Update the next exam text immediately
+updateNextExamText();
+
 // Update the timer every second
-setInterval(updateTimer, 1000);
+const timerInterval = setInterval(updateTimer, 1000);
 updateTimer(); // Initial call to display immediately
